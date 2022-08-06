@@ -16,7 +16,6 @@ TWO = 15
 BLOCKED_THREE = 10  # OXXX
 JUMP_BLOCKED_TWO = 8  # O XX
 JUMP_BLOCKED_THREE = 5  # O XXX
-BLOCKED_TWO = 5
 # LOCKED = 0  # X OOOX or X OO X or XOO X
 ONE = 5
 
@@ -219,5 +218,8 @@ def compute_score(current, x, y):
         final_score += funclib.resolve_pattern_cont(rt_lb)
         final_score += funclib.resolve_pattern_cont(l_r)
 
-def find_best_pos():
-    exit(0)
+def find_best_pos(current):
+    for x in range(0,15):
+        for y in range(0,15):
+            # Find neighbours
+            if not x==0:
