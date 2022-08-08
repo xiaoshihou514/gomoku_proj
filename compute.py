@@ -226,6 +226,7 @@ def compute_score_core(current, x, y):
         l_r[4] = 2
         final_score += pattern.resolve_pattern_cont_rev(l_r)
 
+# Same concept but compute score for enemy moves
 def compute_score_rev_core(current, x, y):
     final_score = 0
     current[x][y] = 2
@@ -428,5 +429,9 @@ def compute_score_rev_core(current, x, y):
         l_r[4] = 1
         final_score += pattern.resolve_pattern_cont(l_r)
 
+# wrapper for compute score
 def compute_score(current, x, y, cache):
     cache.append([x, y, compute_score_core(current, x, y)])
+
+def compute_score_rev(current, x, y, cache):
+    cache.append([x, y, compute_score_core(current, x, y)])   

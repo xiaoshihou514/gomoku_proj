@@ -17,6 +17,7 @@ def search(depth, current):
             # Check if there's a non empty neighbor and compute score if so
             if not is_upper_bound:
                 if current[i][j-1] != 0:    
+                    # multi threading
                     thread = Thread(target=compute.compute_score,args=(current,i,j,tree))
                     thread.start()
                     thread.join()
@@ -46,12 +47,15 @@ def search(depth, current):
                     thread.start()
                     thread.join()     
     if depth == 1:
+        # if this is the last search, we find the move with the largest score and return a tuple
         max = tree[0]
         for item in range(0,len(tree)):
             if item[0] > max[0]:
                 max = item
         return max        
     else:
+        # if not we would find the best enemy move and best counter move
+        # combining these and adding up the total score to get the move with the highest score
         score_board = []
         for item in tree:
             context = commit_move(item[0], item[2], current)
@@ -65,42 +69,45 @@ def search(depth, current):
                     # Check if there's a non empty neighbor and compute score if so
                     if not is_upper_bound:
                         if current[i][j-1] != 0:    
-                            thread = Thread(target=compute.compute_score_rev_core,args=(context,i,j,enemy_tree))
+                            thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
                             thread.start()
                             thread.join()
                             pass
                         if not is_left_bound:
                             if current[i-1][j-1] != 0 or current[i-1][j] != 0: 
-                                thread = Thread(target=compute.compute_score_rev_core,args=(context,i,j,enemy_tree))
+                                thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
                                 thread.start()
                                 thread.join()
                                 pass
                         if not is_right_bound:
                             if current[i+1][j-1] or current[i+1][j] != 0: 
-                                thread = Thread(target=compute.compute_score_rev_core,args=(context,i,j,enemy_tree))
+                                thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
                                 thread.start()
                                 thread.join()    
                     if not is_lower_bound:
                         if current[i][j+1] != 0:
-                            thread = Thread(target=compute.compute_score_rev_core,args=(context,i,j,enemy_tree))
+                            thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
                             thread.start()
                             thread.join()
                         if not is_left_bound and current[i-1][j+1]:
-                            thread = Thread(target=compute.compute_score_rev_core,args=(context,i,j,enemy_tree))
+                            thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
                             thread.start()
                             thread.join()
                         if not is_right_bound and current[i+1][j+1]:
-                            thread = Thread(target=compute.compute_score_rev_core,args=(context,i,j,enemy_tree))
+                            thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
                             thread.start()
                             thread.join() 
+            # find the best enemy move
             max = enemy_tree[0]
             for item in enemy_tree:
                 if item[0] > max[0]:
                     max = item   
             new_depth = depth - 2
             context = commit_move(max[1], max[2], context)
+            # search recursively
             next_best_move = search(new_depth, context)         
             score_board.append(item[1],item[2],item[0]-max[0]+next_best_move[0]) 
+        # find the overall best move
         for item in score_board:
             if item[0] > max[0]:
                 max = item   

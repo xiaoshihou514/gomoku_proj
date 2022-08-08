@@ -75,6 +75,7 @@ JUMP_BLOCKED_THREE_D2_REV = [0, 2, 2, 2, 0, 2]  # len 6
 # JUMP_THREE_D1, 2 -> TWO
 # JUMP_BLOCKED_THREE_D1,2 -> THREE
 # JUMP_BLOCKED_TWO_D1, 2 -> TWO
+# Get pattern in a square and see if there are patterns that we would want
 def resolve_pattern_cont(pattern):
     final_score = 0
     jumps = [0, 0, 0, 0, 0]
@@ -133,6 +134,7 @@ def resolve_pattern_cont(pattern):
         final_score-=compute.TWO        
     return final_score            
 
+# Same concept but for enemy move
 def resolve_pattern_cont_rev(pattern):
     final_score = 0
     jumps = [0, 0, 0, 0, 0]

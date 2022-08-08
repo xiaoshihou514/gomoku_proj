@@ -9,7 +9,6 @@ game state
 
 `TODO: Backend`
 
-recursive search and pruning,
 threat tree search,
 opening impl,
 
