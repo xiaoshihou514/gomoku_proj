@@ -81,7 +81,7 @@ def resolve_pattern_cont(pattern):
     jumps = [0, 0, 0, 0, 0]
     # match len 6
     for i in range(0, 3):
-        match = pattern[i, i + 6]
+        match = pattern[i:i + 6]
         # The reason for the ifs is to exclude -1
         if pattern[0] == 0:
             # Check for FOUR JUMP_FOUR BLOCKED_FOUR_D2 JUMP_THREE JUMP_BLOCKED_THREE_D2
@@ -106,7 +106,7 @@ def resolve_pattern_cont(pattern):
                 final_score += compute.BLOCKED_THREE_D2
     # match len 5
     for i in range(0, 4):
-        match = pattern[i, i + 5]
+        match = pattern[i:i + 5]
         if pattern[0] == 1:
             if pattern == FIVE:
                 return compute.FIVE
@@ -140,7 +140,7 @@ def resolve_pattern_cont_rev(pattern):
     jumps = [0, 0, 0, 0, 0]
     # match len 6
     for i in range(0, 3):
-        match = pattern[i, i + 6]
+        match = pattern[i:i + 6]
         # The reason for the ifs is to exclude -1
         if pattern[0] == 0:
             # Check for FOUR JUMP_FOUR BLOCKED_FOUR_D2 JUMP_THREE JUMP_BLOCKED_THREE_D2 (_REV)
@@ -165,7 +165,7 @@ def resolve_pattern_cont_rev(pattern):
                 final_score += compute.BLOCKED_THREE_D2
     # match len 5
     for i in range(0, 4):
-        match = pattern[i, i + 5]
+        match = pattern[i:i + 5]
         if pattern[0] == 1:
             if pattern == FIVE_REV:
                 return compute.FIVE

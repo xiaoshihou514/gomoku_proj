@@ -1,3 +1,4 @@
+import time
 import pattern
 
 # Defining constants
@@ -225,6 +226,8 @@ def compute_score_core(current, x, y):
         final_score += pattern.resolve_pattern_cont(l_r)
         l_r[4] = 2
         final_score += pattern.resolve_pattern_cont_rev(l_r)
+    current[x][y] = 0
+    return final_score
 
 # Same concept but compute score for enemy moves
 def compute_score_rev_core(current, x, y):
@@ -428,10 +431,21 @@ def compute_score_rev_core(current, x, y):
         final_score += pattern.resolve_pattern_cont_rev(l_r)
         l_r[4] = 1
         final_score += pattern.resolve_pattern_cont(l_r)
+    current[x][y] = 0
+    return final_score    
 
 # wrapper for compute score
 def compute_score(current, x, y, cache):
+<<<<<<< HEAD
+    #print("["+str(x)+","+str(y)+"]")
+    cache.append([compute_score_core(current, x, y),x,y])
+
+def compute_score_rev(current, x, y, cache):
+    #print("["+str(x)+","+str(y)+"]")
+    cache.append([compute_score_core(current, x, y),x,y])   
+=======
     cache.append([x, y, compute_score_core(current, x, y)])
 
 def compute_score_rev(current, x, y, cache):
     cache.append([x, y, compute_score_core(current, x, y)])   
+>>>>>>> 285f33eac27300edf84a604bdbbd3339f5f45e91

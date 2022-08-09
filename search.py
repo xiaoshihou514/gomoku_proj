@@ -1,4 +1,3 @@
-from ast import Param
 from threading import Thread
 import compute
 
@@ -18,38 +17,44 @@ def search(depth, current):
             if not is_upper_bound:
                 if current[i][j-1] != 0:    
                     # multi threading
+<<<<<<< HEAD
+                    print("["+str(i)+","+str(j-1)+"] = "+str(current[i][j-1]))
+                    print(str(current))
+                    thread = Thread(target=compute.compute_score,args=(current.copy(),i,j,tree))
+=======
                     thread = Thread(target=compute.compute_score,args=(current,i,j,tree))
+>>>>>>> 285f33eac27300edf84a604bdbbd3339f5f45e91
                     thread.start()
                     thread.join()
                     pass
                 if not is_left_bound:
                     if current[i-1][j-1] != 0 or current[i-1][j] != 0: 
-                        thread = Thread(target=compute.compute_score,args=(current,i,j,tree))
+                        thread = Thread(target=compute.compute_score,args=(current.copy(),i,j,tree))
                         thread.start()
                         thread.join()
                         pass
                 if not is_right_bound:
                     if current[i+1][j-1] or current[i+1][j] != 0: 
-                        thread = Thread(target=compute.compute_score,args=(current,i,j,tree))
+                        thread = Thread(target=compute.compute_score,args=(current.copy(),i,j,tree))
                         thread.start()
                         thread.join()    
             if not is_lower_bound:
                 if current[i][j+1] != 0:
-                    thread = Thread(target=compute.compute_score,args=(current,i,j,tree))
+                    thread = Thread(target=compute.compute_score,args=(current.copy(),i,j,tree))
                     thread.start()
                     thread.join()
                 if not is_left_bound and current[i-1][j+1]:
-                    thread = Thread(target=compute.compute_score,args=(current,i,j,tree))
+                    thread = Thread(target=compute.compute_score,args=(current.copy(),i,j,tree))
                     thread.start()
                     thread.join()
                 if not is_right_bound and current[i+1][j+1]:
-                    thread = Thread(target=compute.compute_score,args=(current,i,j,tree))
+                    thread = Thread(target=compute.compute_score,args=(current.copy(),i,j,tree))
                     thread.start()
                     thread.join()     
     if depth == 1:
         # if this is the last search, we find the move with the largest score and return a tuple
         max = tree[0]
-        for item in range(0,len(tree)):
+        for item in tree:
             if item[0] > max[0]:
                 max = item
         return max        
@@ -58,7 +63,7 @@ def search(depth, current):
         # combining these and adding up the total score to get the move with the highest score
         score_board = []
         for item in tree:
-            context = commit_move(item[0], item[2], current)
+            context = commit_move(item[1], item[2], current)
             enemy_tree = []
             for i in range(0,15):
                 for j in range(0,15):
@@ -69,23 +74,46 @@ def search(depth, current):
                     # Check if there's a non empty neighbor and compute score if so
                     if not is_upper_bound:
                         if current[i][j-1] != 0:    
+<<<<<<< HEAD
+                            thread = Thread(target=compute.compute_score_rev,args=(context.copy(),i,j,enemy_tree))
+=======
                             thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
+>>>>>>> 285f33eac27300edf84a604bdbbd3339f5f45e91
                             thread.start()
                             thread.join()
                             pass
                         if not is_left_bound:
                             if current[i-1][j-1] != 0 or current[i-1][j] != 0: 
+<<<<<<< HEAD
+                                thread = Thread(target=compute.compute_score_rev,args=(context.copy(),i,j,enemy_tree))
+=======
                                 thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
+>>>>>>> 285f33eac27300edf84a604bdbbd3339f5f45e91
                                 thread.start()
                                 thread.join()
                                 pass
                         if not is_right_bound:
                             if current[i+1][j-1] or current[i+1][j] != 0: 
+<<<<<<< HEAD
+                                thread = Thread(target=compute.compute_score_rev,args=(context.copy(),i,j,enemy_tree))
+=======
                                 thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
+>>>>>>> 285f33eac27300edf84a604bdbbd3339f5f45e91
                                 thread.start()
                                 thread.join()    
                     if not is_lower_bound:
                         if current[i][j+1] != 0:
+<<<<<<< HEAD
+                            thread = Thread(target=compute.compute_score_rev,args=(context.copy(),i,j,enemy_tree))
+                            thread.start()
+                            thread.join()
+                        if not is_left_bound and current[i-1][j+1]:
+                            thread = Thread(target=compute.compute_score_rev,args=(context.copy(),i,j,enemy_tree))
+                            thread.start()
+                            thread.join()
+                        if not is_right_bound and current[i+1][j+1]:
+                            thread = Thread(target=compute.compute_score_rev,args=(context.copy(),i,j,enemy_tree))
+=======
                             thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
                             thread.start()
                             thread.join()
@@ -95,6 +123,7 @@ def search(depth, current):
                             thread.join()
                         if not is_right_bound and current[i+1][j+1]:
                             thread = Thread(target=compute.compute_score_rev,args=(context,i,j,enemy_tree))
+>>>>>>> 285f33eac27300edf84a604bdbbd3339f5f45e91
                             thread.start()
                             thread.join() 
             # find the best enemy move
@@ -106,8 +135,14 @@ def search(depth, current):
             context = commit_move(max[1], max[2], context)
             # search recursively
             next_best_move = search(new_depth, context)         
+<<<<<<< HEAD
+            score_board.append([item[1],item[2],item[0]-max[0]+next_best_move[0]]) 
+        # find the overall best move
+        print(str(score_board))
+=======
             score_board.append(item[1],item[2],item[0]-max[0]+next_best_move[0]) 
         # find the overall best move
+>>>>>>> 285f33eac27300edf84a604bdbbd3339f5f45e91
         for item in score_board:
             if item[0] > max[0]:
                 max = item   
