@@ -436,16 +436,10 @@ def compute_score_rev_core(current, x, y):
 
 # wrapper for compute score
 def compute_score(current, x, y, cache):
-<<<<<<< HEAD
     #print("["+str(x)+","+str(y)+"]")
     cache.append([compute_score_core(current, x, y),x,y])
 
 def compute_score_rev(current, x, y, cache):
     #print("["+str(x)+","+str(y)+"]")
-    cache.append([compute_score_core(current, x, y),x,y])   
-=======
-    cache.append([x, y, compute_score_core(current, x, y)])
+    cache.append([compute_score_rev_core(current, x, y),x,y])   
 
-def compute_score_rev(current, x, y, cache):
-    cache.append([x, y, compute_score_core(current, x, y)])   
->>>>>>> 285f33eac27300edf84a604bdbbd3339f5f45e91
