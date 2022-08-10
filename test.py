@@ -16,7 +16,7 @@ context = [[0,0,2,2,2,0,0,0,0,0,0,0,0,0,0],
            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
 
-#x = 0
+#x = 0 
 #y = 1
 #score = compute.compute_score_core(context, x, y)
 #print("score of move ("+str(x)+","+str(y)+") is "+str(score))

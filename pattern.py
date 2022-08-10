@@ -136,7 +136,6 @@ def resolve_pattern_cont(pattern):
 
 # Same concept but for enemy move
 def resolve_pattern_cont_rev(pattern):
-    print(str(pattern))
     final_score = 0
     jumps = [0, 0, 0, 0, 0]
     # match len 6
