@@ -1,6 +1,6 @@
-import time
+import compute
 import search
-context = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+context = [[0,0,2,2,2,0,0,0,0,0,0,0,0,0,0],
            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -16,5 +16,9 @@ context = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
 
-best_move = search.search(1, context)
+#x = 0
+#y = 1
+#score = compute.compute_score_core(context, x, y)
+#print("score of move ("+str(x)+","+str(y)+") is "+str(score))
+best_move = search.search(5, context)
 print("best move is "+ str(best_move))

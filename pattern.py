@@ -80,10 +80,10 @@ def resolve_pattern_cont(pattern):
     final_score = 0
     jumps = [0, 0, 0, 0, 0]
     # match len 6
-    for i in range(0, 3):
+    for i in range(0, 4):
         match = pattern[i:i + 6]
         # The reason for the ifs is to exclude -1
-        if pattern[0] == 0:
+        if match[0] == 0:
             # Check for FOUR JUMP_FOUR BLOCKED_FOUR_D2 JUMP_THREE JUMP_BLOCKED_THREE_D2
             if match == FOUR:
                 final_score += compute.FOUR
@@ -98,33 +98,33 @@ def resolve_pattern_cont(pattern):
             elif match == JUMP_BLOCKED_THREE_D2:
                 final_score += compute.JUMP_BLOCKED_THREE_D2
                 jumps[3] += 1
-        elif pattern[0] == 2:
+        elif match[0] == 2:
             # Check for BLOCKED_FOUR_D1 BLOCKED_THREE_D2
             if match == BLOCKED_FOUR_D1:
                 final_score += compute.BLOCKED_FOUR_D1
             elif match == BLOCKED_THREE_D2:
                 final_score += compute.BLOCKED_THREE_D2
     # match len 5
-    for i in range(0, 4):
+    for i in range(0, 5):
         match = pattern[i:i + 5]
-        if pattern[0] == 1:
-            if pattern == FIVE:
+        if match[0] == 1:
+            if match == FIVE:
                 return compute.FIVE
-            elif pattern == JUMP_FIVE_D1 or pattern == JUMP_FIVE_D2 or pattern == JUMP_FIVE_D3:
+            elif match == JUMP_FIVE_D1 or match == JUMP_FIVE_D2 or match == JUMP_FIVE_D3:
                 final_score += compute.JUMP_FIVE
                 jumps[0] += 1
-            elif pattern == THREE:
+            elif match == THREE:
                 final_score += compute.THREE
-        elif pattern[0] == 2:
-            if pattern == BLOCKED_THREE_D1:
+        elif match[0] == 2:
+            if match == BLOCKED_THREE_D1:
                 final_score += compute.BLOCKED_THREE
-            elif pattern == JUMP_BLOCKED_TWO_D1:
+            elif match == JUMP_BLOCKED_TWO_D1:
                 final_score += compute.JUMP_BLOCKED_TWO
                 jumps[4] += 1
-        elif pattern[0] == 0:
-            if pattern == BLOCKED_THREE_D2:
+        elif match[0] == 0:
+            if match == BLOCKED_THREE_D2:
                 final_score += compute.BLOCKED_THREE
-            elif pattern == JUMP_BLOCKED_TWO_D2:
+            elif match == JUMP_BLOCKED_TWO_D2:
                 final_score += compute.JUMP_BLOCKED_TWO
                 jumps[4] += 1
     # Subtracting the score counted twice
@@ -136,13 +136,14 @@ def resolve_pattern_cont(pattern):
 
 # Same concept but for enemy move
 def resolve_pattern_cont_rev(pattern):
+    print(str(pattern))
     final_score = 0
     jumps = [0, 0, 0, 0, 0]
     # match len 6
-    for i in range(0, 3):
+    for i in range(0, 4):
         match = pattern[i:i + 6]
         # The reason for the ifs is to exclude -1
-        if pattern[0] == 0:
+        if match[0] == 0:
             # Check for FOUR JUMP_FOUR BLOCKED_FOUR_D2 JUMP_THREE JUMP_BLOCKED_THREE_D2 (_REV)
             if match == FOUR_REV:
                 final_score += compute.FOUR
@@ -157,33 +158,33 @@ def resolve_pattern_cont_rev(pattern):
             elif match == JUMP_BLOCKED_THREE_D2_REV:
                 final_score += compute.JUMP_BLOCKED_THREE_D2
                 jumps[3] += 1
-        elif pattern[0] == 2:
+        if match[0] == 2:
             # Check for BLOCKED_FOUR_D1_REV BLOCKED_THREE_D2_REV
             if match == BLOCKED_FOUR_D1_REV:
                 final_score += compute.BLOCKED_FOUR_D1
             elif match == BLOCKED_THREE_D2_REV:
                 final_score += compute.BLOCKED_THREE_D2
+    for i in range(0, 5):
     # match len 5
-    for i in range(0, 4):
         match = pattern[i:i + 5]
-        if pattern[0] == 1:
-            if pattern == FIVE_REV:
+        if match[0] == 0:
+            if match[0] == 1:
                 return compute.FIVE
-            elif pattern == JUMP_FIVE_D1_REV or pattern == JUMP_FIVE_D2_REV or pattern == JUMP_FIVE_D3_REV:
+            elif match == JUMP_FIVE_D1_REV or match == JUMP_FIVE_D2_REV or match == JUMP_FIVE_D3_REV:
                 final_score += compute.JUMP_FIVE
                 jumps[0] += 1
-            elif pattern == THREE_REV:
+            elif match == THREE_REV:
                 final_score += compute.THREE
-        elif pattern[0] == 2:
-            if pattern == BLOCKED_THREE_D1_REV:
+        elif match[0] == 2:
+            if match == BLOCKED_THREE_D1_REV:
                 final_score += compute.BLOCKED_THREE
-            elif pattern == JUMP_BLOCKED_TWO_D1_REV:
+            elif match == JUMP_BLOCKED_TWO_D1_REV:
                 final_score += compute.JUMP_BLOCKED_TWO
                 jumps[4] += 1
-        elif pattern[0] == 0:
-            if pattern == BLOCKED_THREE_D2_REV:
+        elif match[0] == 0:
+            if match == BLOCKED_THREE_D2_REV:
                 final_score += compute.BLOCKED_THREE
-            elif pattern == JUMP_BLOCKED_TWO_D2_REV:
+            elif match == JUMP_BLOCKED_TWO_D2_REV:
                 final_score += compute.JUMP_BLOCKED_TWO
                 jumps[4] += 1
     # Subtracting the score counted twice

@@ -114,7 +114,7 @@ def search(depth, current):
             # search recursively
             next_best_move = search(new_depth, context)         
         # find the overall best move
-            score_board.append(item[0]-max[0]+next_best_move[0],item[1],item[2]) 
+            score_board.append([item[0]-max[0]+next_best_move[0],item[1],item[2]]) 
         # find the overall best move
         for item in score_board:
             if item[0] > max[0]:
