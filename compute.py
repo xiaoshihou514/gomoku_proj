@@ -1,4 +1,3 @@
-import time
 import pattern
 
 # Defining constants
@@ -27,9 +26,6 @@ SEARCH_DEPTH = 5
 def compute_score_core(current, x, y):
     # init
     final_score = 0
-    if current[x][y] != 0:
-        print("not a legal move")
-        exit(-1)
     current[x][y] = 1
     # Check if it is a single piece
     x_start = min(x - 1, 0)
@@ -235,9 +231,6 @@ def compute_score_core(current, x, y):
 # Same concept but compute score for enemy moves
 def compute_score_rev_core(current, x, y):
     final_score = 0
-    if current[x][y] != 0:
-        print("not a legal move")
-        exit(-1)
     current[x][y] = 2
     # Check if it is a single piece
     x_start = min(x - 1, 0)
@@ -442,8 +435,19 @@ def compute_score_rev_core(current, x, y):
 
 # wrapper for compute score
 def compute_score(current, x, y, cache):
+    if current[x][y] != 0:
+        print("an overwrite at current["+str(x)+"]["+str(y)+"]")
+    print("current["+str(x)+"]["+str(y)+"] has a neighbor")
+    if x == 0 and y == 7:
+        print("0,7 detected")
+        return
     cache.append([compute_score_core(current, x, y),x,y])
 
 def compute_score_rev(current, x, y, cache):
+    if current[x][y] != 0:
+        print("an overwrite at current["+str(x)+"]["+str(y)+"]")
+    print("current["+str(x)+"]["+str(y)+"] has a neighbor")
+    if x == 0 and y == 7:
+        print("0,7 detected")
+        cache.append([compute_score_rev_core(current, x, y),x,y])   
     cache.append([compute_score_rev_core(current, x, y),x,y])   
-

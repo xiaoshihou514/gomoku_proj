@@ -18,7 +18,7 @@ root_window.title("Gomoku Game by Kevin Ye & Sihan Chen")
 root_window.geometry("995x660")
 root_window.resizable(0,0)
 #TODO Please change the path of ico after you clone the repo
-root_window.iconbitmap('C:/Users/jason/Desktop/Summer 2022/Vipul/gomoku/gomoku_proj/GomokuIcon.ico')
+root_window.iconbitmap('./GomokuIcon.ico')
 
 
 #chess info

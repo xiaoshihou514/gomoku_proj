@@ -10,31 +10,31 @@ def search(depth, current):
     for i in range(0,15):
         for j in range(0,15):
             if current[i][j] != 0:
-                pass
+                continue
             is_upper_bound = j == 0
             is_lower_bound = j == 14
             is_left_bound = i == 0
             is_right_bound = i == 14
             # Check if there's a non empty neighbor and compute score if so
-            if current[i][j] != 0 and not is_upper_bound:
+            if not is_upper_bound:
                 if current[i][j-1] != 0:    
                     # multi threading
                     thread = Thread(target=compute.compute_score,args=(current.copy(),i,j,tree))
                     thread.start()
                     thread.join()
-                    pass
+                    continue
                 if not is_left_bound:
                     if current[i-1][j-1] != 0 or current[i-1][j] != 0: 
                         thread = Thread(target=compute.compute_score,args=(current.copy(),i,j,tree))
                         thread.start()
                         thread.join()
-                        pass
+                        continue
                 if not is_right_bound:
                     if current[i+1][j-1] or current[i+1][j] != 0: 
                         thread = Thread(target=compute.compute_score,args=(current.copy(),i,j,tree))
                         thread.start()
                         thread.join()    
-            if current[i][j] != 0 and not is_lower_bound:
+            if not is_lower_bound:
                 if current[i][j+1] != 0:
                     thread = Thread(target=compute.compute_score,args=(current.copy(),i,j,tree))
                     thread.start()
@@ -62,34 +62,35 @@ def search(depth, current):
             context = commit_move(item[1], item[2], current)
             enemy_tree = []
             print("enemy_tree created")
+            print("enemy_tree is "+str(enemy_tree))
             print(str(context))
             for i in range(0,15):
                 for j in range(0,15):
                     if current[i][j] != 0:
-                        pass
+                        continue
                     is_upper_bound = j == 0
                     is_lower_bound = j == 14
                     is_left_bound = i == 0
                     is_right_bound = i == 14
                     # Check if there's a non empty neighbor and compute score if so
-                    if current[i][j] != 0 and not is_upper_bound:
+                    if not is_upper_bound:
                         if current[i][j-1] != 0:    
                             thread = Thread(target=compute.compute_score_rev,args=(context.copy(),i,j,enemy_tree))
                             thread.start()
                             thread.join()
-                            pass
+                            continue
                         if not is_left_bound:
                             if current[i-1][j-1] != 0 or current[i-1][j] != 0: 
                                 thread = Thread(target=compute.compute_score_rev,args=(context.copy(),i,j,enemy_tree))
                                 thread.start()
                                 thread.join()
-                                pass
+                                continue
                         if not is_right_bound:
                             if current[i+1][j-1] or current[i+1][j] != 0: 
                                 thread = Thread(target=compute.compute_score_rev,args=(context.copy(),i,j,enemy_tree))
                                 thread.start()
                                 thread.join()    
-                    if current[i][j] != 0 and not is_lower_bound:
+                    if not is_lower_bound:
                         if current[i][j+1] != 0:
                             thread = Thread(target=compute.compute_score_rev,args=(context.copy(),i,j,enemy_tree))
                             thread.start()
@@ -118,6 +119,12 @@ def search(depth, current):
                     if item[0] > max[0]:
                         max = item   
                 new_depth = depth - 2
+                print()
+                print("enemy_tree be like:")
+                print(str(enemy_tree))
+                print("max be like:")
+                print(str(max))
+                print(str(current))
                 context = commit_move_rev(max[1], max[2], context)
                 # search recursively
                 next_best_move = search(new_depth, context)
@@ -133,14 +140,20 @@ def search(depth, current):
 def commit_move(x, y, current):
     if current[x][y] != 0:
         print("overwrite occured")
-        exit(-1)
+        print("panic!()"+str(1/0))
     current[x][y] = 1
     return current       
 
 def commit_move_rev(x, y, current):
     if current[x][y] != 0:
         print("overwrite occured")
-        exit(-1)
+        print("panic!()"+str(1/0))
+    current[x][y] = 1
+    return current      
 
-    current[x][y] = 2
-    return current       
+def uncommit_move(x, y, current):
+    if current[x][y] == 0:
+        print("overwrite occured")
+        print("panic!()"+str(1/0))
+    current[x][y] = 0
+    return current      

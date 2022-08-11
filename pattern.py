@@ -101,9 +101,9 @@ def resolve_pattern_cont(pattern):
         elif match[0] == 2:
             # Check for BLOCKED_FOUR_D1 BLOCKED_THREE_D2
             if match == BLOCKED_FOUR_D1:
-                final_score += compute.BLOCKED_FOUR_D1
+                final_score += compute.BLOCKED_FOUR
             elif match == BLOCKED_THREE_D2:
-                final_score += compute.BLOCKED_THREE_D2
+                final_score += compute.BLOCKED_THREE
     # match len 5
     for i in range(0, 5):
         match = pattern[i:i + 5]
@@ -155,14 +155,14 @@ def resolve_pattern_cont_rev(pattern):
                 final_score += compute.JUMP_THREE
                 jumps[2] += 1
             elif match == JUMP_BLOCKED_THREE_D2_REV:
-                final_score += compute.JUMP_BLOCKED_THREE_D2
+                final_score += compute.JUMP_BLOCKED_THREE
                 jumps[3] += 1
         if match[0] == 2:
             # Check for BLOCKED_FOUR_D1_REV BLOCKED_THREE_D2_REV
             if match == BLOCKED_FOUR_D1_REV:
-                final_score += compute.BLOCKED_FOUR_D1
+                final_score += compute.BLOCKED_FOUR
             elif match == BLOCKED_THREE_D2_REV:
-                final_score += compute.BLOCKED_THREE_D2
+                final_score += compute.BLOCKED_THREE
     for i in range(0, 5):
     # match len 5
         match = pattern[i:i + 5]
