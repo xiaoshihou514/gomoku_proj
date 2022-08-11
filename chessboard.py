@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+import tkinter.messagebox
 
 PIECE_SIZE = 10
 piece_color = "black"
@@ -28,7 +29,7 @@ frames.create_oval(110 - PIECE_SIZE, 25 - PIECE_SIZE, 110 + PIECE_SIZE, 25 + PIE
 var = tk.StringVar()
 var.set("Holding Black")
 person_chess = tk.Label(root_window, textvariable = var, width = 20, anchor = tk.CENTER, font = ("Times New Roman", 15) )
-person_chess.grid(row = 1, column = 1)
+person_chess.place(x = 650, y = 100)
 pieces_x = [i for i in range(32, 623, 42)]
 pieces_y = [i for i in range(38, 629, 42)]
 
