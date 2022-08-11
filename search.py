@@ -49,6 +49,7 @@ def search(depth, current):
                     count += 1
     while len(tree) < count:
         time.sleep(0.005)
+        print("has not finished running")
     if depth == 1:
         # if this is the last search, we find the move with the largest score and return a tuple
         max = tree[0]

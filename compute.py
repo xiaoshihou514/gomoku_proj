@@ -436,6 +436,8 @@ def compute_score_rev_core(current, x, y):
 # wrapper for compute score
 def compute_score(current, x, y, cache):
     cache.append([compute_score_core(current, x, y),x,y])
+    #print("e")
 
 def compute_score_rev(current, x, y, cache):
     cache.append([compute_score_rev_core(current, x, y),x,y])   
+    #print("e")
