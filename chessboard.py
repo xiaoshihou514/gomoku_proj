@@ -57,19 +57,19 @@ for i in range(65, 81):
     label.place(x = 42 * count + 25, y = 2)
     count += 1
 
-# banner = tk.Label(root_window, text='Choose Chess Color', font=('Times New Roman', 13), bg = "#F5DEB3").place(x=50, y=70, anchor='nw')
-# on_hit = False
-# CheckVar = tk.IntVar()
-# black_choice = tk.Radiobutton(root_window, text="black", variable=CheckVar, value=1, anchor = 'w').place(x = 50, y = 100)
-# white_choice = tk.Radiobutton(root_window, text="white", variable=CheckVar, value=2, anchor = 'w').place(x = 50, y= 130)
-# if CheckVar.get() == "black" or CheckVar.get() == "white":
-#     on_hit = True
-#     color = CheckVar.get()
-#     message = tkinter.messagebox.askokcancel(title = 'color', message = color)
-# def getColor():
-#     global color, on_hit, black_choice, white_choice
-#     if on_hit:
-#         ChessKind(color)
+banner = tk.Label(root_window, text='Choose Chess Color', font=('Times New Roman', 13), bg = "#F5DEB3").place(x=680, y=170, anchor='nw')
+on_hit = False
+CheckVar = tk.IntVar()
+black_choice = tk.Radiobutton(root_window, text="black", variable=CheckVar, value=1, anchor = 'w').place(x = 700, y = 200)
+white_choice = tk.Radiobutton(root_window, text="white", variable=CheckVar, value=2, anchor = 'w').place(x = 700, y= 230)
+if CheckVar.get() == "black" or CheckVar.get() == "white":
+    on_hit = True
+    color = CheckVar.get()
+    message = tkinter.messagebox.askokcancel(title = 'color', message = color)
+def getColor():
+    global color, on_hit, black_choice, white_choice
+    if on_hit:
+        ChessKind(color)
 
 def ChessKind(color):
     global piece_color
