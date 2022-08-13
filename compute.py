@@ -435,19 +435,9 @@ def compute_score_rev_core(current, x, y):
 
 # wrapper for compute score
 def compute_score(current, x, y, cache):
-    if current[x][y] != 0:
-        print("an overwrite at current["+str(x)+"]["+str(y)+"]")
-    print("current["+str(x)+"]["+str(y)+"] has a neighbor")
-    if x == 0 and y == 7:
-        print("0,7 detected")
-        return
     cache.append([compute_score_core(current, x, y),x,y])
+    #print("e")
 
 def compute_score_rev(current, x, y, cache):
-    if current[x][y] != 0:
-        print("an overwrite at current["+str(x)+"]["+str(y)+"]")
-    print("current["+str(x)+"]["+str(y)+"] has a neighbor")
-    if x == 0 and y == 7:
-        print("0,7 detected")
-        cache.append([compute_score_rev_core(current, x, y),x,y])   
     cache.append([compute_score_rev_core(current, x, y),x,y])   
+    #print("e")

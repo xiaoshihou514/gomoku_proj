@@ -17,7 +17,6 @@ root_window = tk.Tk()
 root_window.title("Gomoku Game by Kevin Ye & Sihan Chen")
 root_window.geometry("995x660")
 root_window.resizable(0,0)
-#TODO Please change the path of ico to your path after you clone the repo
 root_window.iconbitmap('./GomokuIcon.ico')
 
 
