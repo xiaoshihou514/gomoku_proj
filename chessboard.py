@@ -9,7 +9,6 @@ axis_black = []
 axis_white = []
 
 person_flag = 1
-color = "black"
 
 
 #root window as chess board
@@ -129,13 +128,13 @@ def putPiece(piece_color):
     board.create_oval(click_x - PIECE_SIZE, click_y - PIECE_SIZE, click_x + PIECE_SIZE, click_y + PIECE_SIZE, fill = piece_color, tags = ("piece"))
     if piece_color == "white":
         axis_white.append([click_x, click_y])
-        showChange("black")
+        ChangeTurn("black")
     elif piece_color == "black":
         axis_black.append([click_x, click_y])
-        showChange("white")
+        ChangeTurn("white")
     #TODO Add the judge of game position: win to end/continues?  
 
-def showChange(color):
+def ChangeTurn(color):
     global piece_color, var, person_chess, frames
     piece_color = color
     frames.delete("show_piece")
