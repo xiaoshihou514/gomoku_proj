@@ -173,7 +173,7 @@ def gameReset():
     end_message.set("")         
     ChangeTurn("black")             
     board.delete("piece")
-    store_chess = [[0]*15]*15
+    store_chess = [[0 for i in range(15)] for j in range(15)]
     piece_color = "black"
     person_flag = 0
     board.bind("<Button-1>", click_cor)
