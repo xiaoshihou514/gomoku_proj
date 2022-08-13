@@ -91,12 +91,12 @@ def resolve_pattern_cont(pattern):
                 final_score += compute.JUMP_FOUR
                 jumps[1] += 1
             elif match == BLOCKED_FOUR_D2:
-                final_score += compute.BLOCKED_FOUR_D2
+                final_score += compute.BLOCKED_FOUR
             elif match == JUMP_THREE_D1 or match == JUMP_THREE_D2:
                 final_score += compute.JUMP_THREE
                 jumps[2] += 1
             elif match == JUMP_BLOCKED_THREE_D2:
-                final_score += compute.JUMP_BLOCKED_THREE_D2
+                final_score += compute.JUMP_BLOCKED_THREE
                 jumps[3] += 1
         elif match[0] == 2:
             # Check for BLOCKED_FOUR_D1 BLOCKED_THREE_D2
