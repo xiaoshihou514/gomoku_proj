@@ -1,6 +1,6 @@
+from imp import get_tag
 import tkinter as tk
 from tkinter import *
-import tkinter.messagebox
 
 PIECE_SIZE = 10
 piece_color = "black"
@@ -30,6 +30,7 @@ var = tk.StringVar()
 var.set("Holding Black")
 person_chess = tk.Label(root_window, textvariable = var, width = 20, anchor = tk.CENTER, font = ("Times New Roman", 15) )
 person_chess.place(x = 650, y = 100)
+''''''
 pieces_x = [i for i in range(32, 623, 42)]
 pieces_y = [i for i in range(38, 629, 42)]
 
@@ -58,29 +59,66 @@ for i in range(65, 81):
     label.place(x = 42 * count + 25, y = 2)
     count += 1
 
-banner = tk.Label(root_window, text='Choose Chess Color', font=('Times New Roman', 13), bg = "#F5DEB3").place(x=680, y=170, anchor='nw')
-on_hit = False
-CheckVar = tk.IntVar()
-black_choice = tk.Radiobutton(root_window, text="black", variable=CheckVar, value=1, anchor = 'w').place(x = 700, y = 200)
-white_choice = tk.Radiobutton(root_window, text="white", variable=CheckVar, value=2, anchor = 'w').place(x = 700, y= 230)
-if CheckVar.get() == "black" or CheckVar.get() == "white":
-    on_hit = True
-    color = CheckVar.get()
-    message = tkinter.messagebox.askokcancel(title = 'color', message = color)
-def getColor():
-    global color, on_hit, black_choice, white_choice
-    if on_hit:
-        ChessKind(color)
 
-def ChessKind(color):
-    global piece_color
-    piece_color = color
-    frames.delete("show_piece")
-    frames.create_oval(110 - PIECE_SIZE, 25 - PIECE_SIZE, 110 + PIECE_SIZE, 25 + PIECE_SIZE, fill = piece_color, tags = ("show_piece"))
+#TODO Fix the function of tk
+# banner = tk.Label(root_window, text='Choose Chess Color', font=('Times New Roman', 13), bg = "#F5DEB3").place(x=680, y=170, anchor='nw')
+# on_hit = False
+# CheckVar = tk.IntVar()
+# black_choice = tk.Radiobutton(root_window, text="black", variable=CheckVar, value=1, anchor = 'w').place(x = 700, y = 200)
+# white_choice = tk.Radiobutton(root_window, text="white", variable=CheckVar, value=2, anchor = 'w').place(x = 700, y= 230)
+# if CheckVar.get() == "black" or CheckVar.get() == "white":
+#     on_hit = True
+#     color = CheckVar.get()
+#     message = tkinter.messagebox.askokcancel(title = 'color', message = color)
+# def getColor():
+#     global color, on_hit, black_choice, white_choice
+#     if on_hit:
+#         ChessKind(color)
+
+# def ChessKind(color):
+#     global piece_color
+#     piece_color = color
+#     frames.delete("show_piece")
+#     frames.create_oval(110 - PIECE_SIZE, 25 - PIECE_SIZE, 110 + PIECE_SIZE, 25 + PIECE_SIZE, fill = piece_color, tags = ("show_piece"))
 
 
+'''
+Mouse Click Event
+<Button-1>  Left
+<Button-2>  Right
+<Double-Button-1>   Double Left Click
+<Double-Button-2>   Double Right Click
+'''
+click_x = 0
+click_y = 0
 
-        
+'''Return the coordinate of click'''
+def click_cor(event):
+    global click_x, click_y
+    print(f"Left Click cooridinate:x= {event.x} y= {event.y}")
+    click_x = {event.x}
+    click_y = {event.y}
+    ChessPos()        
 
+'''Bind the mouse click with chess board'''
+board.bind("<Button-1>", click_cor)
+board.bind("<Double-Button-1>", click_cor)
+
+'''Find the closest intersection of lines and put the chess down'''
+def ChessPos():
+    global click_x, click_y, person_chess, person_flag
+    # intersect = board.find_closest(click_x, click_y)
+    # piece_tuple = board.gettags(intersect)
+
+
+'''Draw piece after find the chess position'''
+def putPiece(piece_color):
+    global axis_black, axis_white
+    board.create_oval(click_x - PIECE_SIZE, click_y - PIECE_SIZE, click_x + PIECE_SIZE, click_y + PIECE_SIZE, fill = piece_color, tags = ("piece"))
+    if piece_color == "white":
+        axis_white.append((click_x, click_y))
+    elif piece_color == "black":
+        axis_black.append((click_x, click_y))
+    #TODO Add the judge of game position: win to end/continues?  
 
 root_window.mainloop()
