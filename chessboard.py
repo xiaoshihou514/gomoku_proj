@@ -10,6 +10,21 @@ win_color = "black"
 '''Store the location that the pieces have been put, 15*15 matrix'''
 # TODO: store_chess = [[0]*15]*15: initiation in this way will let store_chess[x][x] = 1 change x cols in all rows be 1
 store_chess = [[0 for i in range(15)] for j in range(15)]
+# store_chess = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+#            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
 
 '''marker of winners: 1 as black wins, 2 as white wins, 0 as none of player wins'''
 person_flag = 0
@@ -34,7 +49,6 @@ person_chess.place(x = 650, y = 100)
 '''Print the chess board'''
 #background
 board = tk.Canvas(root_window, bg = "#F5DEB3", width = 640, height = 640)
-#board.bind("<Button-1>", coorBack)  #对鼠标进行事件绑定，方便获取点击位置的坐标，下篇会用到
 board.grid(row = 0, column = 0, rowspan = 6)
 #line
 for i in range(15):
@@ -66,7 +80,7 @@ for i in range(15):
         intersection.append([(42 * i + 32),(42 * j + 38)])
 #store intersects(x,y) in x first order: scan all intersects in one x then moves to x_1=x+42    
 # print(intersection)
-#TODO Import search(AI Steps) and interpret(game position) (1 - our piece) (2 - enemy)
+#Import search(AI Steps) and interpret(game position) (1 - our piece) (2 - enemy)
 
 '''
 Mouse Click Event
@@ -94,7 +108,6 @@ board.bind("<Button-1>", click_cor)
 #board.bind("<Double-Button-1>", click_cor)
 
 '''Find the closest intersection of lines'''
-'''Try depth = 15 in search.py, then less/more depths'''
 def ChessPos():
     global click_x, click_y, person_flag, pieces_x, pieces_y, intersection, piece_color, store_chess
     min_dist = 255
@@ -108,9 +121,11 @@ def ChessPos():
             min_dist = dist
             chess_x = intersection[i][0]
             chess_y = intersection[i][1]
-    #check = search.search(1, store_chess)
-    #print(check)
-    print(f"chess_x = {chess_x}, chess_y = {chess_y}")
+    #TODO
+    '''Try depth = 3 in search.py, then less/more depths'''        
+    #check = search.search(3, store_chess)
+    # print("", check)
+    # print(f"chess_x = {chess_x}, chess_y = {chess_y}")
     putPiece(piece_color, chess_x, chess_y)
 
 
