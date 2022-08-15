@@ -12,6 +12,7 @@ to run the code.
 
 ## Features
 `UI` using tkinter
+
 `multi-threaded backend` using native python
 
 ## What can I do with it?
