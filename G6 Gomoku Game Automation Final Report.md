@@ -8,9 +8,26 @@
 
 ## 2. Algorithm -Kevin
 
-So, how exactly are we going to implement the winning strategy in code? Well, we started off with a simple approach. We would weigh each move by finding the patterns it creates, for example, if the piece creates a “three in a row”. We would increment the score for this move. We can then continue to compute possible enemy moves and come up with the best move.
+# Algorithm-Main idea
+   The main algorithm we used is a relatively simple one, we would iterate over every possible move and score them using predefined weights. To accelerate the process, we used individual threads to calculate the score of each possible move and remove the moves that seem less promising (i.e moves with lower scores). The program also consists of a special opening algorithm that uses a different set of weights optimised for the opening moves of the game.
+# Algorithm-Program Flow
+   The function search was the main function called from the front end. It is defined as follows:
+```
+def search(depth, current)
+```
+Where depth is the depth of the search and current is a 15x15 array consists of integers. $curent uses 0, 1 and 2 to represent blank space, friendly piece and enemy piece. 
+The program is immediately followed by two for loops that would compute the score of possible moves (defined by having a neighbour in any direction) by calling:
+```
+def compute_score(current, x, y, cache):
+   cache.append([compute_score_core(current, x, y),x,y])
+```
+Which would append the data in the given `cache` array.
+In `compute_score_core(current, x, y)`, the program would search in all directions to find predefined patterns. The function uses brutal functional process to put all data in arrays and pass them to functions in the `pattern` file for further parsing. Which brings the program to 
+```
+def resolve_pattern_cont(pattern)
+```
+This part of the code would look for patterns that either is a pattern beneficial to us or prohibits further enemy moves and return a score. And finally `compute_score_core()` would return the final score.
 
-Now is that it? Not exactly, we also had a different strategy when we are playing the opening part of the game. Now for time limitations, now it is just a normal search with different weights assigned. The reason we did that is because by past experiences, the normal minimax search is not exactly suitable in the opening part of the game. I intended to come up with a different approach, but again, time limitations.
 
 ## 3. Showcase - Sihan
 
