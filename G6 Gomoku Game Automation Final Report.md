@@ -16,6 +16,7 @@
 def search(depth, current)
 ```
 Where depth is the depth of the search and current is a 15x15 array consists of integers. $curent uses 0, 1 and 2 to represent blank space, friendly piece and enemy piece. 
+
 The program is immediately followed by two for loops that would compute the score of possible moves (defined by having a neighbour in any direction) by calling:
 ```
 def compute_score(current, x, y, cache):
@@ -27,8 +28,34 @@ In `compute_score_core(current, x, y)`, the program would search in all directio
 def resolve_pattern_cont(pattern)
 ```
 This part of the code would look for patterns that either is a pattern beneficial to us or prohibits further enemy moves and return a score. And finally `compute_score_core()` would return the final score.
-Now that `$tree` is full of possible moves, we check if `$depth` is 1, in which case the function would simply iterate over `$tree` and return whatsoever.
 
+Now that `$tree` is full of possible moves, we check if `$depth` is 1, in which case the function would simply iterate over `$tree` and return whichever move with the largest score.
+
+If it is not though, the algorithm would iterate over `$tree` and for each one, use 
+```
+def commit_move(x, y, current)
+# Really self-explainatory isn't it
+```
+
+to create a new instance of `current`. We then use a similar process to compute the best enemy move using 
+```
+def compute_score_rev(current, x, y, cache)
+	compute_score_rev_core(current, x, y)
+		def resolve_pattern_cont_rev(pattern)
+```
+
+all of them are almost identical to its "non-rev" replica.
+
+Finally, we would decrease `$depth` by 2 and call **def search(depth, current)** recursively, which yields the overall best move for a certain depth after adding them together.
+
+### 2.3 Algorithm-Opening Move
+   If you recall from earlier, there's an implementation of an opening function made specifically for the opening part of the game. It was implemented in __./compute_opening.py_ and __./search_opening.py__, which is almost an replica of compute.py and search.py. The only difference is that I changed the weights of *JUMP_THREE* and *TWO*.
+
+Why so? Because although it would soon be trival in later game (you usually don't expect much from these patterns), in early game it is generally better to create more `open` patterns than to make a longer pattern like `$THREE` or `$FOUR`, which could be blocked by only a few steps.
+
+### 2.4 Algorithm-Conclusion
+   The implementation of the algorithm is a straightforward and naive one, the weights would have to be tested for an AI that plays better. However, it is a working concept and I am surprised how much I have implemented and reworked.
+   Had the time been less intimidating, I would have choosen a better weight through testing and put together another implementation for the opening part of the algorithm, it was a pity but I am happy of what I `have` done in the limiting time.
 
 ## 3. Showcase - Sihan
 
