@@ -9,6 +9,7 @@ $ python chessboard.py
 ```
 
 to run the code.
+More information can be found in the md file with a long name.
 
 ## Features
 `UI` using tkinter
