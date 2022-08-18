@@ -8,9 +8,9 @@
 
 ## 2. Algorithm -Kevin
 
-### Algorithm-Main idea
+### 2.1 Algorithm-Main idea
    The main algorithm we used is a relatively simple one, we would iterate over every possible move and score them using predefined weights. To accelerate the process, we used individual threads to calculate the score of each possible move and remove the moves that seem less promising (i.e moves with lower scores). The program also consists of a special opening algorithm that uses a different set of weights optimised for the opening moves of the game.
-### Algorithm-Program Flow
+### 2.2 Algorithm-Program Flow
    The function search was the main function called from the front end. It is defined as follows:
 ```
 def search(depth, current)
@@ -27,6 +27,7 @@ In `compute_score_core(current, x, y)`, the program would search in all directio
 def resolve_pattern_cont(pattern)
 ```
 This part of the code would look for patterns that either is a pattern beneficial to us or prohibits further enemy moves and return a score. And finally `compute_score_core()` would return the final score.
+Now that `$tree` is full of possible moves, we check if `$depth` is 1, in which case the function would simply iterate over `$tree` and return whatsoever.
 
 
 ## 3. Showcase - Sihan
