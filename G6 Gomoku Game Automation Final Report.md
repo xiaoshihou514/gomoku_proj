@@ -8,9 +8,9 @@
 
 ## 2. Algorithm -Kevin
 
-### Algorithm-Main idea
+### 2.1 Algorithm-Main idea
    The main algorithm we used is a relatively simple one, we would iterate over every possible move and score them using predefined weights. To accelerate the process, we used individual threads to calculate the score of each possible move and remove the moves that seem less promising (i.e moves with lower scores). The program also consists of a special opening algorithm that uses a different set of weights optimised for the opening moves of the game.
-### Algorithm-Program Flow
+### 2.2 Algorithm-Program Flow
    The function search was the main function called from the front end. It is defined as follows:
 ```
 def search(depth, current)
@@ -26,8 +26,21 @@ In `compute_score_core(current, x, y)`, the program would search in all directio
 ```
 def resolve_pattern_cont(pattern)
 ```
-This part of the code would look for patterns that either is a pattern beneficial to us or prohibits further enemy moves and return a score. And finally `compute_score_core()` would return the final score.
+This part of the code would look for patterns that either is a pattern beneficial to us or prohibits further enemy moves and return a score. And finally `compute_score_core()` would return the final score. Which would bring us back to the original search function.
+Now `$tree` is full of scored moves, so we check if `$depth` is equal to 1 (either a search with depth 1 or called recursively by another `search` instacne), in which case we would simply return the move with the largest score.
+If that is not the case, the search function would find the best enemy move after each possible move we have made. This is done by iterating over `$tree` and using  `def commit_move(x, y, current)` to create a new instance of `$current`, and we would use a similar precess like earlier to compute the best enemy move. The process involves
+```
+def compute_score_rev(current, x, y, cache)
 
+compute_score_rev_core(current, x, y)
+
+def resolve_pattern_cont_rev(pattern)
+```
+which all use similiar procedures to the original duntion.
+After all results were collected, we would decrease `$depth` by 2 and call `def search(depth, current)` again to get the overall best score, and finally iterating over every move to find the maximum score to return to the front end.
+
+### 2.3 Algorithm-Opening Moves
+   If you recall from earlier, the opening moves were made by a different algorithm.
 
 ## 3. Showcase - Sihan
 
